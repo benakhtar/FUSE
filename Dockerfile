@@ -61,7 +61,7 @@ RUN \
 # git clone fuse into /home/user/FUSE
 WORKDIR '/home/user'
 RUN \
-  git clone --recurse-submodules -j8 --config core.autocrlf=input https://github.com/encryptogroup/FUSE.git
+  git clone --recurse-submodules -j8 --config core.autocrlf=input https://github.com/benakhtar/FUSE/tree/main
 
 # build
 WORKDIR '/home/user/FUSE'
