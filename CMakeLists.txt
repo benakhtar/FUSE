@@ -170,7 +170,8 @@ add_subdirectory(${FUSE_SOURCE_DIR})
 add_dependencies(FUSE FUSE-fbs-headers-generation)
 
 # Link against flatbuffers to already declared target.
-target_link_libraries(FUSE PUBLIC flatbuffers)
+target_link_libraries(FUSE PUBLIC flatbuffers
+libpthread.so.0)
 target_include_directories(FUSE PUBLIC ${FUSE_FLATBUFFERS_INCLUDE_DIR} ${FUSE_FBS_INCLUDE_PREFIX})
 
 add_subdirectory(src/frontend)
