@@ -24,8 +24,8 @@ RUN \
   apt-get install -y flex bison default-jdk && \
   apt-get install -y build-essential software-properties-common && \
   add-apt-repository ppa:ubuntu-toolchain-r/test && \
-  apt-get install -y gcc-11 g++-11 cmake python3 && \
-  apt-get install -y libssl-dev libgoogle-perftools-dev libboost-all-dev libz-dev && \
+  apt-get install -y gcc-11 g++-11 cmake zlib && \
+  apt-get install -y libssl-dev libgoogle-perftools-dev libboost-all-dev libz-dev bzip2 && \
   rm -rf /var/lib/apt/lists/*
 
 ENV PYTHON_VERSION 3.9.0
@@ -61,9 +61,11 @@ RUN \
 # git clone fuse into /home/user/FUSE
 WORKDIR '/home/user'
 RUN \
-  git clone --recurse-submodules -j8 --config core.autocrlf=input https://github.com/benakhtar/FUSE/tree/main
+  git clone --recurse-submodules -j8 --config core.autocrlf=input https://github.com/benakhtar/FUSE.git
 
 # build
+RUN \
+  rm -r /home/user/FUSE/extern/MOTION/extern/flatbuffers
 WORKDIR '/home/user/FUSE'
 RUN \
   python3 setup.py --setup-build
