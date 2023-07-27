@@ -24,8 +24,11 @@ RUN \
   apt-get install -y flex bison default-jdk && \
   apt-get install -y build-essential software-properties-common && \
   add-apt-repository ppa:ubuntu-toolchain-r/test && \
-  apt-get install -y gcc-11 g++-11 cmake zlib && \
-  apt-get install -y libssl-dev libgoogle-perftools-dev libboost-all-dev libz-dev bzip2 && \
+  apt-get install -y gcc-11 g++-11 && \
+  
+  
+RUN \
+  apt-get install -y libssl-dev libgoogle-perftools-dev libboost-all-dev libz-dev && \
   rm -rf /var/lib/apt/lists/*
 
 ENV PYTHON_VERSION 3.9.0
@@ -47,6 +50,8 @@ RUN set -ex \
     && pyenv rehash
 
 
+
+
 # Uncomment the en_US.UTF-8 line in /etc/locale.gen
 RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen
 # locale-gen generates locales for all uncommented locales in /etc/locale.gen
@@ -58,6 +63,18 @@ RUN \
   update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 90 --slave /usr/bin/g++ g++ /usr/bin/g++-11
 
 # temp settings: remove later when repository is public
+
+
+WORKDIR '/home/user'
+RUN \
+  wget https://github.com/Kitware/CMake/releases/download/v3.27.1/cmake-3.27.1.tar.gz && \
+  tar -xzf cmake-3.27.1.tar.gz
+WORKDIR '/home/user/cmake-3.27.1'
+RUN \
+  ./bootstrap -- -DCMAKE_BUILD_TYPE:STRING=Release && \
+  make && \
+  make install
+
 # git clone fuse into /home/user/FUSE
 WORKDIR '/home/user'
 RUN \

@@ -90,16 +90,6 @@ if(NOT EXISTS "${FUSE_GZIP_DIR}/CMakeLists.txt")
         WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}")
 endif()
 
-# ############################# Trying to fix subgraph issue
-if(FUSE_BUILD_SUBGRAPH_OPTIMIZATION)
-   if(NOT EXISTS "${PROJECT_SOURCE_DIR}/extern/glasgow-subgraph-solver/CMakeLists.txt")
-           find_package(Git REQUIRED)
-           message("initialize Git submodule: extern/glasgow-subgraph-solver")
-           execute_process(COMMAND git submodule update --init extern/glasgow-subgraph-solver
-               WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}")
-   endif()
-endif()
-
 add_subdirectory(${FUSE_GZIP_DIR} EXCLUDE_FROM_ALL)
 
 # Add MOTION if the Backend or Frontend is to be built
