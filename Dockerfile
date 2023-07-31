@@ -17,10 +17,13 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # Install.
 RUN \
-apt-get install -y flex bison default-jdk && \
+  apt-get update && \
+  apt-get -y upgrade && \
+  apt-get install -y locales git make wget curl && \
+  apt-get install -y libwww-perl && \
+  apt-get install -y flex bison default-jdk && \
   apt-get install -y build-essential software-properties-common && \
   add-apt-repository ppa:ubuntu-toolchain-r/test && \
-  apt-get install -y gcc-11 g++-11 cmake python3 && \
   apt-get install -y gcc-11 g++-11 cmake && \
   apt-get install -y libbz2-dev && \
   add-apt-repository ppa:deadsnakes/ppa && \
@@ -31,9 +34,9 @@ apt-get install -y flex bison default-jdk && \
   
 
 
-+RUN \
-+  rm /usr/bin/python3 && \
-+  ln -s /usr/bin/python3.9 /usr/bin/python3
+RUN \
+  rm /usr/bin/python3 && \
+  ln -s /usr/bin/python3.9 /usr/bin/python3
 
 # Uncomment the en_US.UTF-8 line in /etc/locale.gen
 RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen
@@ -47,12 +50,6 @@ RUN \
 
 # git clone fuse into /home/user/FUSE
 WORKDIR '/home/user'
-RUN \
-  git clone --recurse-submodules -j8 --config core.autocrlf=input https://github.com/benakhtar/FUSE.git
-
-# build
-RUN \
-  rm -r /home/user/FUSE/extern/MOTION/extern/flatbuffers
   
 RUN \
    git clone --recurse-submodules -j8 --config core.autocrlf=input https://github.com/encryptogroup/FUSE.git
