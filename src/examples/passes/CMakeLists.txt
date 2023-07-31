@@ -1,3 +1,4 @@
+set(CMAKE_VERBOSE_MAKEFILE ON)
 add_executable(vec_pass vec_main.cpp)
 add_executable(sub_pass sub_repl_main.cpp)
 
@@ -5,6 +6,7 @@ target_link_libraries(vec_pass PRIVATE
         FUSE
         FUSE_Bristol
         ${MASON_PACKAGE_zlib_STATIC_LIBS}
+        # pthread
 )
 
 target_link_libraries(sub_pass PRIVATE

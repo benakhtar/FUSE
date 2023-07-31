@@ -25,7 +25,7 @@ add_subdirectory(common)
 add_subdirectory(file_size_comparisons)
 add_subdirectory(loading_times_comparison)
 add_subdirectory(ram_consumption)
-add_subdirectory(motion_runtime_benchmarks)
+#add_subdirectory(motion_runtime_benchmarks)
 
 ################################################################################################
 

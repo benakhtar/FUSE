@@ -24,6 +24,7 @@
 cmake_minimum_required(VERSION 3.14)
 cmake_policy(SET CMP0075 NEW)
 project(FUSE VERSION 0.1.0)
+set(CMAKE_VERBOSE_MAKEFILE_ON)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DFLATBUFFERS_USE_STD_SPAN") # add std::span support to flatbuffers
 
@@ -46,7 +47,7 @@ set(FUSE_GZIP_INCLUDE_DIR "${FUSE_EXTERN_DIR}/gzip-hpp/include")
 set(FUSE_TUTORIAL_DIR "${FUSE_SOURCE_DIR}/examples")
 
 
-option(FUSE_BUILD_TESTS "Build Tests" OFF)
+option(FUSE_BUILD_TESTS "Build Tests" ON)
 option(FUSE_BUILD_BENCHMARKS "Build Benchmarks" ON)
 option(FUSE_USE_ADDRESS_SANITIZER "Enable compile and link options for address sanitizer" OFF)
 option(FUSE_BUILD_BRISTOL_FRONTEND "Build Bristol Frontend" ON)
