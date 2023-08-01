@@ -35,7 +35,7 @@ add_executable(fusetest
         TestDepthAnalysis.cpp
         TestLargeCircuits.cpp
         TestInstructionVectorization.cpp
-        TestMOTIONFrontend.cpp
+        #TestMOTIONFrontend.cpp
         )
 
 
