@@ -69,6 +69,9 @@ COPY src/backend/CMakeLists.txt \
 
 COPY src/examples/passes/CMakeLists.txt \
   /home/user/FUSE/src/examples/passes/CMakeLists.txt
+  
+COPY tests/CMakeLists.txt \
+  /home/user/FUSE/tests/CMakeLists.txt
 
 #flatbuffers are built by setup.py
 #make flatbuffers
