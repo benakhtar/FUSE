@@ -22,29 +22,29 @@
 # SOFTWARE.
 
 add_executable(fusetest
-        # TestWrappers.cpp
-        # TestInterpreter.cpp
-        #TestBristolFrontend.cpp
-        # TestHyCCFrontend.cpp
-        #TestDOTBackend.cpp
-        # TestMOTIONBackend.cpp
-        #TestDeadNodeOptimization.cpp
-        #TestConstantFolding.cpp
+        TestWrappers.cpp
+        TestInterpreter.cpp
+        TestBristolFrontend.cpp
+        TestHyCCFrontend.cpp
+        TestDOTBackend.cpp
+        TestMOTIONBackend.cpp
+        TestDeadNodeOptimization.cpp
+        TestConstantFolding.cpp
         TestFrequentSubcircuitReplacement.cpp
         TestGraphBackend.cpp
         TestDepthAnalysis.cpp
-        #TestLargeCircuits.cpp
+        TestLargeCircuits.cpp
         TestInstructionVectorization.cpp
-        #TestMOTIONFrontend.cpp
+        TestMOTIONFrontend.cpp
         )
 
 
 target_link_libraries(fusetest PUBLIC
         FUSE
-        # FUSE_HyCC
+        FUSE_HyCC
         FUSE_Bristol
-        #FUSE_MOTION
-        #FUSE_MOTION_FE
+        FUSE_MOTION
+        FUSE_MOTION_FE
         FUSE_DistGraph
         gtest_main
         flatbuffers
