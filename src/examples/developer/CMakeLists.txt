@@ -21,6 +21,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+set(CMAKE_VERBOSE_MAKEFILE ON)
 add_executable(fuse_dev_tutorial Tutorial.cpp)
 
 target_link_libraries(fuse_dev_tutorial PRIVATE
@@ -30,6 +31,7 @@ FUSE_Bristol
 # FUSE_MOTION
 flatbuffers
 ${MASON_PACKAGE_zlib_STATIC_LIBS}
+FUSE_DistGraph
 )
 
 target_include_directories(fuse_dev_tutorial PRIVATE

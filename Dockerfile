@@ -1,7 +1,7 @@
 #
 # FUSE Dockerfile
 #
-# https://github.com/norakh/FUSE
+
 #
 # authors: Github @MoritzHuppert moritz.huppert@outlook.de
 #	   Github @norakh
@@ -31,8 +31,10 @@ RUN \
   apt-get install -y python3.9 && \
   apt-get install -y libssl-dev libgoogle-perftools-dev libboost-all-dev libz-dev && \
   rm -rf /var/lib/apt/lists/*
-  
 
+RUN \
+  apt-get update && \
+  apt-get install -y vim
 
 RUN \
   rm /usr/bin/python3 && \
@@ -50,10 +52,10 @@ RUN \
 
 # git clone fuse into /home/user/FUSE
 WORKDIR '/home/user'
-  
+
 RUN \
    git clone --recurse-submodules -j8 --config core.autocrlf=input https://github.com/encryptogroup/FUSE.git
- 
+
 RUN rm -rf /home/user/FUSE/extern/MOTION/extern/flatbuffers
 
 RUN ldconfig
@@ -64,12 +66,21 @@ COPY CMakeLists.txt /home/user/FUSE
 COPY benchmarks/CMakeLists.txt \
   /home/user/FUSE/benchmarks/CMakeLists.txt
 
+# compilation fixes - required
 COPY src/backend/CMakeLists.txt \
   /home/user/FUSE/src/backend/CMakeLists.txt
 
+# adds developer directory... enables developer tutorial
+COPY src/examples/CMakeLists.txt \
+     /home/user/FUSE/src/examples/CMakeLists.txt
+
+# enables verbose
+COPY src/examples/developer/CMakeLists.txt \
+     /home/user/FUSE/src/examples/developer/CMakeLists.txt
+
 COPY src/examples/passes/CMakeLists.txt \
   /home/user/FUSE/src/examples/passes/CMakeLists.txt
-  
+
 COPY tests/CMakeLists.txt \
   /home/user/FUSE/tests/CMakeLists.txt
 
@@ -85,12 +96,13 @@ WORKDIR '/home/user/FUSE/extern/flatbuffers/build'
 RUN \
   make install
 
-
-#build
-  
+# build
 WORKDIR '/home/user/FUSE'
 RUN \
   python3 setup.py --setup-build
+
+# show what got built
+RUN ls -lR /home/user/FUSE/build/bin/bm
 
 # Define default command.
 CMD ["bash"]
